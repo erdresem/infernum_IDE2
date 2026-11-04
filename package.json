@@ -1,0 +1,12 @@
+{
+  "name": "infernum-ide-build",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GitHub Actions build kit for Infernum IDE portable VS Code OSS distributions for Windows and Linux. Node.js is installed on hosted runners only.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build:linux": "node scripts/build-ide.mjs --target linux-x64",
+    "build:windows": "node scripts/build-ide.mjs --target win32-x64"
+  }
+}

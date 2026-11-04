@@ -1,0 +1,232 @@
+{
+  "name": "infernum-code",
+  "displayName": "Infernum IDE — AI & Editor",
+  "description": "Built-in single-model AI workspace and coding agent for Infernum IDE.",
+  "version": "0.3.1",
+  "publisher": "infernum-labs",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "coding-agent",
+    "deepseek",
+    "gemini",
+    "openai",
+    "claude",
+    "ollama",
+    "lm-studio",
+    "local-ai",
+    "vllm",
+    "single-model"
+  ],
+  "icon": "media/icon.png",
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onView:infernum.sidebar",
+    "onCommand:infernum.open",
+    "onCommand:infernum.addAgent",
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "infernum",
+          "title": "Infernum",
+          "icon": "media/activity.svg"
+        }
+      ]
+    },
+    "views": {
+      "infernum": [
+        {
+          "id": "infernum.sidebar",
+          "name": "Infernum Code",
+          "type": "webview",
+          "icon": "media/activity.svg",
+          "when": "infernum.aiEnabled"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "infernum.selectMode",
+        "title": "Infernum IDE: Select Workspace Mode",
+        "category": "Infernum IDE"
+      },
+      {
+        "command": "infernum.mode.editor",
+        "title": "Infernum IDE: Editor Mode (AI Off)",
+        "category": "Infernum IDE"
+      },
+      {
+        "command": "infernum.mode.ai",
+        "title": "Infernum IDE: AI Workspace (No Editor)",
+        "category": "Infernum IDE"
+      },
+      {
+        "command": "infernum.mode.hybrid",
+        "title": "Infernum IDE: AI + Editor",
+        "category": "Infernum IDE"
+      },
+      {
+        "command": "infernum.open",
+        "title": "Infernum Code: Open"
+      },
+      {
+        "command": "infernum.addAgent",
+        "title": "Infernum Code: Add AI Agent"
+      },
+      {
+        "command": "infernum.ask",
+        "title": "Infernum Code: Ask Infernum",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "infernum.fix",
+        "title": "Infernum Code: Fix with Infernum",
+        "icon": "$(wrench)"
+      },
+      {
+        "command": "infernum.explain",
+        "title": "Infernum Code: Explain with Infernum",
+        "icon": "$(book)"
+      },
+      {
+        "command": "infernum.refactor",
+        "title": "Infernum Code: Refactor with Infernum",
+        "icon": "$(wand)"
+      },
+      {
+        "command": "infernum.cancel",
+        "title": "Infernum Code: Stop Agent"
+      },
+      {
+        "command": "infernum.importAgent",
+        "title": "Infernum Code: Import Agent"
+      },
+      {
+        "command": "infernum.exportAgent",
+        "title": "Infernum Code: Export Agent"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "infernum.ask",
+          "when": "editorHasSelection && infernum.aiEnabled",
+          "group": "infernum@1"
+        },
+        {
+          "command": "infernum.fix",
+          "when": "editorHasSelection && infernum.aiEnabled",
+          "group": "infernum@2"
+        },
+        {
+          "command": "infernum.explain",
+          "when": "editorHasSelection && infernum.aiEnabled",
+          "group": "infernum@3"
+        },
+        {
+          "command": "infernum.refactor",
+          "when": "editorHasSelection && infernum.aiEnabled",
+          "group": "infernum@4"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "infernum.cancel",
+          "when": "infernum.agentRunning"
+        },
+        {
+          "command": "infernum.mode.editor"
+        },
+        {
+          "command": "infernum.mode.ai"
+        },
+        {
+          "command": "infernum.mode.hybrid"
+        },
+        {
+          "command": "infernum.selectMode"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "infernum.open",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i"
+      },
+      {
+        "command": "infernum.ask",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Infernum Code",
+      "properties": {
+        "infernum.maxAgentSteps": {
+          "type": "number",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 20,
+          "description": "Maximum tool iterations per Agent Mode request."
+        },
+        "infernum.maxContextFiles": {
+          "type": "number",
+          "default": 80,
+          "minimum": 10,
+          "maximum": 300,
+          "description": "Maximum workspace files listed to an agent."
+        },
+        "infernum.defaultMode": {
+          "type": "string",
+          "enum": [
+            "chat",
+            "agent",
+            "code",
+            "debug",
+            "explain",
+            "plan",
+            "review"
+          ],
+          "default": "agent",
+          "description": "Default interaction mode."
+        },
+        "infernum.ideMode": {
+          "type": "string",
+          "enum": [
+            "editor",
+            "ai",
+            "hybrid"
+          ],
+          "default": "hybrid",
+          "description": "Infernum IDE workspace layout: editor only, standalone AI workspace, or editor with AI sidebar."
+        },
+        "infernum.restoreMode": {
+          "type": "boolean",
+          "default": true,
+          "description": "Restore the last Infernum IDE workspace mode when the application starts."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -p . -w",
+    "test": "npm run compile && node --test tests/*.test.cjs",
+    "package": "npm run compile && node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

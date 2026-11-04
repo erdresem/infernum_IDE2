@@ -1,0 +1,7 @@
+{
+  "telemetry.telemetryLevel": "off",
+  "telemetry.enableCrashReporter": false,
+  "window.title": "${activeEditorShort}${separator}Infernum IDE",
+  "workbench.startupEditor": "welcomePage",
+  "infernum.restoreMode": true
+}

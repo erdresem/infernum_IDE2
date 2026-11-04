@@ -1,0 +1,30 @@
+{
+  "nameShort": "Infernum IDE",
+  "nameLong": "Infernum IDE — AI & Code Editor",
+  "applicationName": "infernum",
+  "dataFolderName": ".infernum-ide",
+  "win32AppUserModelId": "Infernum.InfernumIDE",
+  "win32DirName": "Infernum IDE",
+  "win32MutexName": "infernum",
+  "win32RegValueName": "Infernum IDE",
+  "linuxIconName": "infernum",
+  "darwinBundleIdentifier": "com.infernum.ide",
+  "extensionsGallery": {
+    "serviceUrl": "https://open-vsx.org/vscode/gallery",
+    "itemUrl": "https://open-vsx.org/vscode/item",
+    "resourceUrlTemplate": "https://open-vsx.org/vscode/unpkg/{publisher}/{name}/{version}/{path}",
+    "extensionUrlTemplate": "https://open-vsx.org/vscode/gallery/{publisher}/{name}/latest"
+  },
+  "linkProtectionTrustedDomains": [
+    "https://open-vsx.org"
+  ],
+  "sharedDataFolderName": ".infernum-ide-shared",
+  "urlProtocol": "infernum",
+  "linuxDesktopName": "Infernum IDE",
+  "win32NameVersion": "Infernum IDE",
+  "win32ShellNameShort": "Infernum IDE",
+  "win32x64AppId": "{D7A11E10-0A3E-4B42-8C6C-9C1A4F11A103}",
+  "win32arm64AppId": "{D7A11E10-0A3E-4B42-8C6C-9C1A4F11A104}",
+  "win32x64UserAppId": "{D7A11E10-0A3E-4B42-8C6C-9C1A4F11A105}",
+  "win32arm64UserAppId": "{D7A11E10-0A3E-4B42-8C6C-9C1A4F11A106}"
+}
